@@ -47,7 +47,7 @@ body { font-family: var(--font-sans); background-color: var(--bg-primary); color
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.25rem 0; transition: var(--transition); }
 .navbar.scrolled { background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.9rem 0; box-shadow: var(--shadow-md); }
-.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; position: relative; }
 .nav-logo { font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--text-primary); text-decoration: none; transition: var(--transition); }
 .nav-logo:hover { color: var(--accent-light); }
 .logo-bracket { color: var(--accent); }
@@ -56,6 +56,15 @@ body { font-family: var(--font-sans); background-color: var(--bg-primary); color
 .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gradient-main); border-radius: 2px; transition: width 0.3s ease; }
 .nav-links a:hover { color: var(--text-primary); }
 .nav-links a:hover::after { width: 100%; }
+.nav-toggle { display: none; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: var(--radius-md); border: 1px solid var(--border); background: rgba(139, 92, 246, 0.08); color: var(--text-primary); cursor: pointer; transition: var(--transition); }
+.nav-toggle:hover { border-color: var(--accent); background: rgba(139, 92, 246, 0.16); }
+.nav-toggle-icon { position: relative; width: 20px; height: 2px; background: currentColor; border-radius: 999px; transition: var(--transition); }
+.nav-toggle-icon::before, .nav-toggle-icon::after { content: ''; position: absolute; left: 0; width: 20px; height: 2px; background: currentColor; border-radius: 999px; transition: var(--transition); }
+.nav-toggle-icon::before { top: -6px; }
+.nav-toggle-icon::after { top: 6px; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon { background: transparent; }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::before { top: 0; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-toggle-icon::after { top: 0; transform: rotate(-45deg); }
 .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 7rem 2rem 4rem; text-align: center; }
 .hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
 .hero-glow { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%); pointer-events: none; }
@@ -166,7 +175,11 @@ body { font-family: var(--font-sans); background-color: var(--bg-primary); color
 .footer-socials a { width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
 .footer-socials a:hover { color: var(--accent-light); border-color: var(--accent); background: rgba(139, 92, 246, 0.1); transform: translateY(-3px); }
 @media (max-width: 1024px) { .hero-content { text-align: center; padding-right: 0; } .hero-description { margin: 0 auto 2.5rem; } .hero-actions { justify-content: center; } .hero-stats { justify-content: center; } .hero-visual { position: relative; top: auto; right: auto; transform: none; margin-bottom: 3rem; } .sobre-grid { grid-template-columns: 1fr; } .sobre-code { position: static; } .skills-categories { grid-template-columns: 1fr; } .projects-grid { grid-template-columns: 1fr; } .project-card.featured { grid-column: span 1; } .contato-grid { grid-template-columns: 1fr; } }
-@media (max-width: 768px) { .nav-links { display: none; } .hero-stats { flex-wrap: wrap; gap: 1.5rem; } .stat-divider { display: none; } .footer-inner { flex-direction: column; text-align: center; } .footer-socials { justify-content: center; } }
+@media (max-width: 768px) { .nav-toggle { display: inline-flex; } .nav-cta { display: none; } .nav-links { display: none; position: absolute; top: calc(100% + 0.9rem); right: 2rem; flex-direction: column; align-items: stretch; gap: 0; min-width: 220px; padding: 1rem; background: rgba(10, 10, 15, 0.98); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); backdrop-filter: blur(18px); }
+.nav-links.nav-open { display: flex; }
+.nav-links a { padding: 0.8rem 0.9rem; border-radius: var(--radius-md); }
+.nav-links a:hover { background: rgba(139, 92, 246, 0.1); }
+.nav-links a::after { display: none; } .hero-stats { flex-wrap: wrap; gap: 1.5rem; } .stat-divider { display: none; } .footer-inner { flex-direction: column; text-align: center; } .footer-socials { justify-content: center; } }
 @media (max-width: 480px) { .container { padding: 0 1.25rem; } .hero { padding: 6rem 1.25rem 3rem; } }
   </style>
 </head>
@@ -178,7 +191,10 @@ body { font-family: var(--font-sans); background-color: var(--bg-primary); color
       <a href="#hero" class="nav-logo">
         <span class="logo-bracket">&lt;</span>VM<span class="logo-bracket">/&gt;</span>
       </a>
-      <nav class="nav-links">
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav-toggle-icon"></span>
+      </button>
+      <nav class="nav-links" id="nav-links">
         <a href="#sobre">Sobre</a>
         <a href="#habilidades">Habilidades</a>
         <a href="#projetos">Projetos</a>
@@ -568,6 +584,25 @@ body { font-family: var(--font-sans); background-color: var(--bg-primary); color
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+      });
+
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.setAttribute('aria-label', 'Abrir menu');
+        });
+      });
+    }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
