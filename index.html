@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virgínia Mondêgo — Desenvolvedora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+/* ============================================================
+   VIRGÍNIA MONDÊGO — PORTFOLIO (CSS EMBEDDED)
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg-primary: #0a0a0f; --bg-secondary: #0f0f1a; --bg-card: #13131f; --bg-card-hover: #1a1a2e;
+  --border: rgba(139, 92, 246, 0.15); --border-hover: rgba(139, 92, 246, 0.45);
+  --accent: #8b5cf6; --accent-light: #a78bfa; --accent-dark: #6d28d9; --accent-glow: rgba(139, 92, 246, 0.25); --accent-pink: #ec4899;
+  --text-primary: #f1f0f5; --text-secondary: #a09ab8; --text-muted: #5c5478;
+  --gradient-main: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  --gradient-card: linear-gradient(145deg, #13131f, #1a1a2e);
+  --font-sans: 'Inter', system-ui, sans-serif; --font-mono: 'Fira Code', monospace;
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px; --radius-xl: 32px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.4); --shadow-md: 0 8px 32px rgba(0,0,0,0.5); --shadow-glow: 0 0 40px rgba(139, 92, 246, 0.2);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-sans); background-color: var(--bg-primary); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+::selection { background: var(--accent); color: #fff; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--accent-dark); border-radius: 3px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.accent { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border-radius: var(--radius-md); font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; border: none; transition: var(--transition); white-space: nowrap; }
+.btn-primary { background: var(--gradient-main); color: #fff; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(139, 92, 246, 0.5); }
+.btn-outline { background: transparent; color: var(--accent-light); border: 1.5px solid var(--accent); }
+.btn-outline:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+.btn-ghost { background: rgba(139, 92, 246, 0.1); color: var(--accent-light); border: 1.5px solid var(--border); }
+.btn-ghost:hover { background: rgba(139, 92, 246, 0.2); border-color: var(--accent); transform: translateY(-2px); }
+.btn-full { width: 100%; justify-content: center; }
+.section-header { margin-bottom: 3.5rem; }
+.section-tag { font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-light); letter-spacing: 0.05em; display: block; margin-bottom: 0.75rem; }
+.section-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; color: var(--text-primary); line-height: 1.2; }
+.fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.25rem 0; transition: var(--transition); }
+.navbar.scrolled { background: rgba(10, 10, 15, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.9rem 0; box-shadow: var(--shadow-md); }
+.nav-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+.nav-logo { font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--text-primary); text-decoration: none; transition: var(--transition); }
+.nav-logo:hover { color: var(--accent-light); }
+.logo-bracket { color: var(--accent); }
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: var(--transition); position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gradient-main); border-radius: 2px; transition: width 0.3s ease; }
+.nav-links a:hover { color: var(--text-primary); }
+.nav-links a:hover::after { width: 100%; }
+.hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 7rem 2rem 4rem; text-align: center; }
+.hero-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+.hero-glow { position: absolute; top: 20%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%); pointer-events: none; }
+.hero-content { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding-right: 360px; }
+.hero-greeting { font-family: var(--font-mono); font-size: 1rem; color: var(--accent-light); margin-bottom: 1rem; letter-spacing: 0.05em; }
+.hero-name { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+.hero-role { font-family: var(--font-mono); font-size: 1.15rem; color: var(--text-secondary); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.25rem; }
+.typed-prefix { color: var(--accent); }
+.typed-text { color: var(--accent-light); border-right: 2px solid var(--accent); padding-right: 4px; animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { border-color: var(--accent); } 50% { border-color: transparent; } }
+.hero-description { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.8; }
+.hero-visual { position: absolute; top: 50%; right: 0; transform: translateY(-50%); display: flex; align-items: center; justify-content: center; margin-bottom: 0; }
+.avatar-wrapper { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
+.avatar-ring { position: absolute; border-radius: 50%; border: 1.5px solid var(--border); animation: spin-slow linear infinite; }
+.ring-1 { width: 250px; height: 250px; border-top-color: var(--accent); animation-duration: 12s; }
+.ring-2 { width: 300px; height: 300px; border-right-color: var(--accent-pink); animation-duration: 20s; animation-direction: reverse; }
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.avatar-circle { width: 190px; height: 190px; border-radius: 50%; background: var(--gradient-main); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(139, 92, 246, 0.4); position: relative; z-index: 1; }
+.avatar-initials { font-size: 3.3rem; font-weight: 900; color: #fff; font-family: var(--font-sans); letter-spacing: -0.02em; }
+.floating-badge { position: absolute; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 0.4rem 0.8rem; font-size: 0.75rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem; box-shadow: var(--shadow-md); animation: float 3s ease-in-out infinite; white-space: nowrap; z-index: 2; }
+.badge-1 { top: 0px; right: -55px; animation-delay: 0s; }
+.badge-2 { bottom: 24px; left: -62px; animation-delay: 1s; }
+.badge-3 { top: 40%; right: -76px; animation-delay: 2s; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 3rem; }
+.hero-stats { display: flex; align-items: center; justify-content: center; gap: 2rem; }
+.stat { display: flex; flex-direction: column; }
+.stat-number { font-size: 1.75rem; font-weight: 800; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+.stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat-divider { width: 1px; height: 40px; background: var(--border); }
+.scroll-indicator { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; color: var(--accent); cursor: pointer; transition: var(--transition); }
+.scroll-indicator:hover { transform: translateX(-50%) translateY(5px); }
+.scroll-arrow { width: 25px; height: 25px; border-right: 3px solid var(--accent); border-bottom: 3px solid var(--accent); transform: rotate(45deg); animation: arrow-bounce 2s infinite; }
+@keyframes arrow-bounce { 0%, 20%, 50%, 80%, 100% { transform: rotate(45deg) translate(0, 0); } 40% { transform: rotate(45deg) translate(10px, 10px); } 60% { transform: rotate(45deg) translate(5px, 5px); } }
+.sobre { padding: 7rem 0; background: var(--bg-secondary); position: relative; }
+.sobre::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.sobre-text p { color: var(--text-secondary); margin-bottom: 1.25rem; font-size: 1.05rem; line-height: 1.8; }
+.sobre-text p strong { color: var(--accent-light); }
+.sobre-highlights { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+.highlight-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); transition: var(--transition); }
+.highlight-item:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateX(4px); }
+.highlight-icon { font-size: 1.4rem; flex-shrink: 0; }
+.highlight-item div { display: flex; flex-direction: column; }
+.highlight-item strong { color: var(--text-primary); font-size: 0.95rem; }
+.highlight-item span { color: var(--text-muted); font-size: 0.82rem; }
+.sobre-code { position: sticky; top: 6rem; }
+.code-card { background: #0d0d18; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-glow); }
+.code-header { background: #111120; padding: 0.85rem 1.25rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #28c840; }
+.code-filename { margin-left: auto; font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); }
+.code-body { padding: 1.75rem; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.9; overflow-x: auto; }
+.c-brace { color: #e879f9; }
+.c-key { color: #7dd3fc; }
+.c-str { color: #86efac; }
+.c-bool { color: #fb923c; }
+.habilidades { padding: 7rem 0; background: var(--bg-primary); }
+.skills-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 4rem; }
+.skill-category { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; transition: var(--transition); }
+.skill-category:hover { border-color: var(--border-hover); box-shadow: var(--shadow-glow); transform: translateY(-4px); }
+.category-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+.category-icon { font-size: 1.2rem; }
+.skills-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.skill-pill { padding: 0.4rem 1rem; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 100px; font-size: 0.82rem; font-weight: 500; color: var(--accent-light); transition: var(--transition); cursor: default; }
+.skill-pill:hover { background: rgba(139, 92, 246, 0.25); border-color: var(--accent); transform: translateY(-2px); }
+.proficiency-bars { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem; }
+.proficiency-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2rem; }
+.bar-item { margin-bottom: 1.5rem; }
+.bar-label { display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500; }
+.bar-track { height: 8px; background: rgba(139, 92, 246, 0.1); border-radius: 100px; overflow: hidden; }
+.bar-fill { height: 100%; width: 0; background: var(--gradient-main); border-radius: 100px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+.bar-item.visible .bar-fill { width: var(--w); }
+.projetos { padding: 7rem 0; background: var(--bg-secondary); position: relative; }
+.projetos::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-pink), transparent); }
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.project-card { background: var(--gradient-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; transition: var(--transition); cursor: default; }
+.project-card:hover { border-color: var(--border-hover); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5), var(--shadow-glow); }
+.project-card.featured { grid-column: span 2; background: linear-gradient(145deg, #1a1030, #1a1a2e); border-color: rgba(139, 92, 246, 0.3); }
+.project-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.project-icon { font-size: 2rem; line-height: 1; }
+.project-links { display: flex; gap: 0.75rem; }
+.project-link { color: var(--text-muted); text-decoration: none; transition: var(--transition); display: flex; align-items: center; }
+.project-link:hover { color: var(--accent-light); transform: translateY(-2px); }
+.project-body { flex: 1; }
+.project-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); background: rgba(139, 92, 246, 0.1); padding: 0.25rem 0.75rem; border-radius: 100px; display: inline-block; margin-bottom: 0.75rem; }
+.project-title { font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; line-height: 1.3; }
+.project-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
+.project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: auto; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+.project-tech span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); background: rgba(255,255,255,0.04); padding: 0.2rem 0.6rem; border-radius: var(--radius-sm); }
+.contato { padding: 7rem 0; background: var(--bg-primary); }
+.contato-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; align-items: start; }
+.contato-intro { font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2.5rem; }
+.contact-items { display: flex; flex-direction: column; gap: 1rem; }
+.contact-item { display: flex; align-items: center; gap: 1.25rem; padding: 1.1rem 1.5rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); text-decoration: none; transition: var(--transition); color: inherit; }
+.contact-item:hover { border-color: var(--border-hover); background: var(--bg-card-hover); transform: translateX(6px); box-shadow: var(--shadow-glow); }
+.contact-icon { width: 44px; height: 44px; background: rgba(139, 92, 246, 0.15); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--accent-light); flex-shrink: 0; }
+.contact-label { display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.15rem; }
+.contact-value { display: block; font-size: 0.92rem; font-weight: 500; color: var(--text-primary); }
+.contact-hint { display: block; margin-top: 0.45rem; font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+.footer { background: var(--bg-secondary); border-top: 1px solid var(--border); padding: 2.5rem 0; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+.footer-copy { font-size: 0.85rem; color: var(--text-muted); }
+.heart { color: var(--accent-pink); }
+.footer-socials { display: flex; gap: 1rem; }
+.footer-socials a { width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: var(--transition); }
+.footer-socials a:hover { color: var(--accent-light); border-color: var(--accent); background: rgba(139, 92, 246, 0.1); transform: translateY(-3px); }
+@media (max-width: 1024px) { .hero-content { text-align: center; padding-right: 0; } .hero-description { margin: 0 auto 2.5rem; } .hero-actions { justify-content: center; } .hero-stats { justify-content: center; } .hero-visual { position: relative; top: auto; right: auto; transform: none; margin-bottom: 3rem; } .sobre-grid { grid-template-columns: 1fr; } .sobre-code { position: static; } .skills-categories { grid-template-columns: 1fr; } .projects-grid { grid-template-columns: 1fr; } .project-card.featured { grid-column: span 1; } .contato-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .nav-links { display: none; } .hero-stats { flex-wrap: wrap; gap: 1.5rem; } .stat-divider { display: none; } .footer-inner { flex-direction: column; text-align: center; } .footer-socials { justify-content: center; } }
+@media (max-width: 480px) { .container { padding: 0 1.25rem; } .hero { padding: 6rem 1.25rem 3rem; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>VM<span class="logo-bracket">/&gt;</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a href="#contato" class="btn btn-outline nav-cta">Fale comigo</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-visual">
+        <div class="avatar-wrapper">
+          <div class="avatar-ring ring-1"></div>
+          <div class="avatar-ring ring-2"></div>
+          <div class="avatar-circle">
+            <span class="avatar-initials">VM</span>
+          </div>
+          <div class="floating-badge badge-1">
+            <span class="badge-icon">🐍</span>
+            <span>Python</span>
+          </div>
+          <div class="floating-badge badge-2">
+            <span class="badge-icon">🤖</span>
+            <span>IA / RPA</span>
+          </div>
+          <div class="floating-badge badge-3">
+            <span class="badge-icon">🎓</span>
+            <span>Eng. Comp.</span>
+          </div>
+        </div>
+      </div>
+      <p class="hero-greeting">Olá, mundo! Eu sou</p>
+      <h1 class="hero-name">Virgínia Mondêgo</h1>
+      <p class="hero-role">
+        <span class="typed-prefix">$ </span>
+        <span class="typed-text">Desenvolvedora</span>
+      </p>
+      <p class="hero-description">
+        Bacharela em Ciência e Tecnologia e graduanda em Engenharia da Computação pela UFMA. 
+        Especialista em automação de processos (RPA) e desenvolvimento de soluções com Inteligência Artificial.
+      </p>
+      <div class="hero-actions">
+        <a href="#projetos" class="btn btn-primary">Ver projetos</a>
+        <a href="#contato" class="btn btn-ghost">Entre em contato</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">Software</span>
+          <span class="stat-label">Desenvolvimento</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">RPA</span>
+          <span class="stat-label">Automação</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-number">UFMA</span>
+          <span class="stat-label">Formação</span>
+        </div>
+      </div>
+    </div>
+    <a href="#sobre" class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </a>
+  </section>
+
+  <!-- ===== SOBRE ===== -->
+  <section class="sobre" id="sobre">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// sobre mim</span>
+        <h2 class="section-title">Minha Trajetória</h2>
+      </div>
+      <div class="sobre-grid">
+        <div class="sobre-text">
+          <p>
+            Sou uma profissional dedicada e responsável, com sólida base acadêmica em <strong>Ciência e Tecnologia</strong> e atualmente aprofundando meus conhecimentos em <strong>Engenharia da Computação</strong> na UFMA.
+          </p>
+          <p>
+            Minha atuação é focada no desenvolvimento de softwares e na <strong>automação de processos (RPA)</strong>, utilizando tecnologias modernas para otimizar fluxos de trabalho e criar soluções inteligentes. Tenho experiência prática no setor público, atuando no desenvolvimento de ferramentas para a Procuradoria Geral do Maranhão.
+          </p>
+          <p>
+            Busco constantemente agregar valor através da tecnologia, integrando <strong>Inteligência Artificial</strong> e <strong>Machine Learning</strong> em aplicações reais para resolver problemas complexos de forma eficiente.
+          </p>
+          <div class="sobre-highlights">
+            <div class="highlight-item">
+              <span class="highlight-icon">🎓</span>
+              <div>
+                <strong>Bacharelado em Ciência e Tecnologia</strong>
+                <span>UFMA (2021 - 2025)</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">⚡</span>
+              <div>
+                <strong>Engenharia da Computação</strong>
+                <span>UFMA (Em andamento)</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">💼</span>
+              <div>
+                <strong>Setor de Desenvolvimento</strong>
+                <span>Procuradoria Geral do Maranhão</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sobre-code">
+          <div class="code-card">
+            <div class="code-header">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+              <span class="code-filename">virginia.json</span>
+            </div>
+            <pre class="code-body"><code><span class="c-brace">{</span>
+  <span class="c-key">"nome"</span>: <span class="c-str">"Virgínia Maria Mondêgo Ferreira"</span>,
+  <span class="c-key">"formacao"</span>: <span class="c-str">"BICT e Engenharia da Computação"</span>,
+  <span class="c-key">"especialidade"</span>: <span class="c-brace">[</span>
+    <span class="c-str">"IA"</span>, <span class="c-str">"RPA"</span>, <span class="c-str">"Python"</span>
+  <span class="c-brace">]</span>,
+  <span class="c-key">"competencias"</span>: <span class="c-brace">[</span>
+    <span class="c-str">"Liderança"</span>,
+    <span class="c-str">"Criatividade"</span>,
+    <span class="c-str">"Adaptabilidade"</span>
+  <span class="c-brace">]</span>
+<span class="c-brace">}</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HABILIDADES ===== -->
+  <section class="habilidades" id="habilidades">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// habilidades</span>
+        <h2 class="section-title">Tecnologias & Ferramentas</h2>
+      </div>
+      <div class="skills-categories">
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <span class="category-icon">🐍</span> Linguagens
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-pill">Python</div>
+            <div class="skill-pill">JavaScript</div>
+            <div class="skill-pill">HTML5 / CSS3</div>
+            <div class="skill-pill">Java (Básico)</div>
+            <div class="skill-pill">PHP (Básico)</div>
+            <div class="skill-pill">C (Básico)</div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <span class="category-icon">🤖</span> IA & Automação
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-pill">RPA</div>
+            <div class="skill-pill">Selenium</div>
+            <div class="skill-pill">Playwright</div>
+            <div class="skill-pill">LangChain</div>
+            <div class="skill-pill">Google Gemini API</div>
+            <div class="skill-pill">Machine Learning</div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <span class="category-icon">🛠</span> Ferramentas
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-pill">Git / GitHub</div>
+            <div class="skill-pill">Docker</div>
+            <div class="skill-pill">PostgreSQL</div>
+            <div class="skill-pill">Looker Studio</div>
+            <div class="skill-pill">VS Code</div>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3 class="category-title">
+            <span class="category-icon">💡</span> Áreas de Atuação
+          </h3>
+          <div class="skills-grid">
+            <div class="skill-pill">Engenharia de Software</div>
+            <div class="skill-pill">Automação de Processos</div>
+            <div class="skill-pill">Inteligência Artificial</div>
+            <div class="skill-pill">Análise de Dados</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="proficiency-bars">
+        <h3 class="proficiency-title">Domínio Técnico</h3>
+        <div class="bar-item">
+          <div class="bar-label"><span>Python / RPA</span><span>95%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:95%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Web Scraping (Selenium/Playwright)</span><span>90%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:90%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Integração de APIs de IA</span><span>85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>Bancos de Dados (SQL)</span><span>80%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="--w:80%"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== PROJETOS ===== -->
+  <section class="projetos" id="projetos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// portfólio</span>
+        <h2 class="section-title">Experiência & Projetos</h2>
+      </div>
+      <div class="projects-grid">
+
+        <article class="project-card featured">
+          <div class="project-header">
+            <div class="project-icon">⚖️</div>
+            <div class="project-links">
+              <span class="project-tag">Profissional</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">RPA & Web Scraping</span>
+            <h3 class="project-title">Automação de Processos Judiciais (PJe)</h3>
+            <p class="project-desc">Desenvolvimento de robôs para automação de tarefas repetitivas e extração de metadados processuais na Procuradoria Geral do Maranhão. Integração com Google Sheets API e contorno de desafios de MFA.</p>
+          </div>
+          <div class="project-tech">
+            <span>Python</span><span>Playwright</span><span>Selenium</span><span>Google Sheets API</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-icon">✈️</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Acadêmico</span>
+            <h3 class="project-title">Sistema de Compra com Chatbot IA</h3>
+            <p class="project-desc">API REST para compra rápida de passagens aéreas integrada com chatbot dinâmico utilizando Google Generative AI e MongoDB.</p>
+          </div>
+          <div class="project-tech">
+            <span>Flask</span><span>Google AI</span><span>MongoDB</span><span>Python</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-icon">🌍</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Pessoal</span>
+            <h3 class="project-title">Assistente Virtual de Viagens</h3>
+            <p class="project-desc">Agente de IA autônomo utilizando LangChain e Gemini para roteiros personalizados e consulta em tempo real via Amadeus API.</p>
+          </div>
+          <div class="project-tech">
+            <span>LangChain</span><span>Gemini API</span><span>Amadeus API</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-icon">📝</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Profissional</span>
+            <h3 class="project-title">Sistema de inscrição para residentes e estagiários</h3>
+            <p class="project-desc">A aplicação automatiza o fluxo de candidatos, o upload de documentos e o envio de e-mails de confirmação, com painel administrativo e permissões por perfil.</p>
+          </div>
+          <div class="project-tech">
+            <span>Python</span><span>Django</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PostgreSQL</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-header">
+            <div class="project-icon">📚</div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Profissional</span>
+            <h3 class="project-title">Sistema de uma biblioteca de prompts</h3>
+            <p class="project-desc">Plataforma de catálogo e gerenciamento de prompts. O sistema permite criar, favoritar e classificar prompts, além de copiar textos com variáveis dinâmicas e cadastro restrito por CPF.</p>
+          </div>
+          <div class="project-tech">
+            <span>Python</span><span>Django</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Docker</span><span>PostgreSQL</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTATO ===== -->
+  <section class="contato" id="contato">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">// contato</span>
+        <h2 class="section-title">Vamos nos conectar?</h2>
+      </div>
+      <div class="contato-grid">
+        <div class="contato-info">
+          <p class="contato-intro">
+            Estou disponível para novas oportunidades em desenvolvimento de software, automação e projetos de IA. Entre em contato pelos canais oficiais:
+          </p>
+          <div class="contact-items">
+            <a href="mailto:virginiamariamf@gmail.com?subject=Contato%20via%20portf%C3%B3lio&body=Ol%C3%A1%20Virg%C3%ADnia%2C%0A%0AGostaria%20de%20falar%20com%20voc%C3%AA%20sobre%20um%20projeto%20ou%20oportunidade.%0A%0AAtenciosamente%2C" class="contact-item">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <span class="contact-label">E-mail</span>
+                <span class="contact-value">virginiamariamf@gmail.com</span>
+                <span class="contact-hint">Clique para abrir uma mensagem pronta no seu aplicativo de e-mail.</span>
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/in/virg%C3%ADnia-mond%C3%AAgo-66b29b278" class="contact-item" target="_blank" rel="noopener noreferrer">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <div>
+                <span class="contact-label">LinkedIn</span>
+                <span class="contact-value">Virgínia Mondêgo</span>
+                <span class="contact-hint">Clique para abrir o perfil no LinkedIn.</span>
+              </div>
+            </a>
+            <a href="https://github.com/VirginiaMond" class="contact-item" target="_blank" rel="noopener noreferrer">
+              <div class="contact-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.238 1.84 1.238 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              </div>
+              <div>
+                <span class="contact-label">GitHub</span>
+                <span class="contact-value">VirginiaMond</span>
+                <span class="contact-hint">Clique para abrir o perfil no GitHub.</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-bracket">&lt;</span>VM<span class="logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer-copy">
+          &copy; 2025 Virgínia Mondêgo. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.project-card, .skill-category, .bar-item, .highlight-item, .contact-item').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+
+  </script>
+</body>
+</html>
