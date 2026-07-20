@@ -122,8 +122,8 @@ const projects = {
       'Separação entre responsabilidade de chatbot, API e persistência.',
     ],
     melhorias: [
-      'Adicionar autenticação e trilha de auditoria.',
-      'Integrar novos meios de pagamento e rastreamento de pedidos.',
+      'Adicionar trilha de auditoria.',
+      'Integrar novos meios de pagamento e API de viagens.',
     ],
     arquitetura: 'Backend em Flask consumindo IA generativa e persistindo o histórico de interações em MongoDB.',
     creditos: [
