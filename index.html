@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./modal.css" />
   <style>
 /* ============================================================
    VIRGÍNIA MONDÊGO — PORTFOLIO (CSS EMBEDDED)
@@ -432,7 +433,7 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
       </div>
       <div class="projects-grid">
 
-        <article class="project-card featured">
+        <article class="project-card featured" data-project-id="pje">
           <div class="project-header">
             <div class="project-icon">⚖️</div>
             <div class="project-links">
@@ -447,9 +448,12 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
           <div class="project-tech">
             <span>Python</span><span>Playwright</span><span>Selenium</span><span>Google Sheets API</span>
           </div>
+          <div class="project-actions">
+            <button type="button" class="btn btn-outline project-details-btn" data-open-project="pje" aria-label="Ver detalhes do projeto Automação de Processos Judiciais PJe">Ver detalhes</button>
+          </div>
         </article>
 
-        <article class="project-card">
+        <article class="project-card" data-project-id="sistema-compra-chatbot-ia">
           <div class="project-header">
             <div class="project-icon">✈️</div>
           </div>
@@ -461,9 +465,12 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
           <div class="project-tech">
             <span>Flask</span><span>Google AI</span><span>MongoDB</span><span>Python</span>
           </div>
+          <div class="project-actions">
+            <button type="button" class="btn btn-outline project-details-btn" data-open-project="sistema-compra-chatbot-ia" aria-label="Ver detalhes do projeto Sistema de Compra com Chatbot IA">Ver detalhes</button>
+          </div>
         </article>
 
-        <article class="project-card">
+        <article class="project-card" data-project-id="assistente-virtual-viagens">
           <div class="project-header">
             <div class="project-icon">🌍</div>
           </div>
@@ -475,9 +482,12 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
           <div class="project-tech">
             <span>LangChain</span><span>Gemini API</span><span>Amadeus API</span>
           </div>
+          <div class="project-actions">
+            <button type="button" class="btn btn-outline project-details-btn" data-open-project="assistente-virtual-viagens" aria-label="Ver detalhes do projeto Assistente Virtual de Viagens">Ver detalhes</button>
+          </div>
         </article>
 
-        <article class="project-card">
+        <article class="project-card" data-project-id="inscricao-residentes-estagiarios">
           <div class="project-header">
             <div class="project-icon">📝</div>
           </div>
@@ -489,9 +499,12 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
           <div class="project-tech">
             <span>Python</span><span>Django</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>PostgreSQL</span>
           </div>
+          <div class="project-actions">
+            <button type="button" class="btn btn-outline project-details-btn" data-open-project="inscricao-residentes-estagiarios" aria-label="Ver detalhes do projeto Sistema de inscrição para residentes e estagiários">Ver detalhes</button>
+          </div>
         </article>
 
-        <article class="project-card">
+        <article class="project-card" data-project-id="biblioteca-prompts">
           <div class="project-header">
             <div class="project-icon">📚</div>
           </div>
@@ -502,6 +515,9 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
           </div>
           <div class="project-tech">
             <span>Python</span><span>Django</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Docker</span><span>PostgreSQL</span>
+          </div>
+          <div class="project-actions">
+            <button type="button" class="btn btn-outline project-details-btn" data-open-project="biblioteca-prompts" aria-label="Ver detalhes do projeto Sistema de uma biblioteca de prompts">Ver detalhes</button>
           </div>
         </article>
 
@@ -571,6 +587,37 @@ p, .sobre-text p, .project-desc, .contato-intro, .contact-hint, .highlight-item 
       </div>
     </div>
   </footer>
+
+  <div class="project-modal" id="project-modal" aria-hidden="true" hidden>
+    <div class="project-modal__backdrop" data-modal-close></div>
+    <div class="project-modal__dialog" id="project-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" aria-describedby="project-modal-content" tabindex="-1">
+      <button type="button" class="project-modal__close" id="project-modal-close" aria-label="Fechar detalhes do projeto">
+        <span aria-hidden="true">×</span>
+      </button>
+      <header class="project-modal__header">
+        <div class="project-modal__heading">
+          <span class="project-modal__eyebrow" id="project-modal-category"></span>
+          <h3 class="project-modal__title" id="project-modal-title"></h3>
+        </div>
+        <div class="project-modal__meta" aria-label="Resumo do projeto">
+          <span class="project-modal__meta-pill" id="project-modal-status"></span>
+          <span class="project-modal__meta-pill" id="project-modal-date"></span>
+        </div>
+      </header>
+      <nav class="project-modal__tabs" role="tablist" aria-label="Abas dos detalhes do projeto">
+        <button type="button" class="project-modal__tab is-active" role="tab" aria-selected="true" data-tab="overview">Visão Geral</button>
+        <button type="button" class="project-modal__tab" role="tab" aria-selected="false" data-tab="technologies">Tecnologias</button>
+        <button type="button" class="project-modal__tab" role="tab" aria-selected="false" data-tab="gallery">Galeria</button>
+        <button type="button" class="project-modal__tab" role="tab" aria-selected="false" data-tab="learning">Aprendizados</button>
+      </nav>
+      <div class="project-modal__body">
+        <div class="project-modal__content" id="project-modal-content" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./projects.js"></script>
+  <script src="./modal.js"></script>
 
   <script>
     window.addEventListener('scroll', () => {
